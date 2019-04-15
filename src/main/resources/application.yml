@@ -1,0 +1,25 @@
+server:
+  port: 8082
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: local-queue
+          group: producer-consumer
+          binder: rabbit
+          consumer:
+            autoBindDlq: true
+            republishToDlq: true
+            requeueRejected: false
+      binders:
+        rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
